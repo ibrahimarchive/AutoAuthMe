@@ -1,0 +1,20 @@
+{
+  "name": "autoauthme",
+  "version": "1.0.0",
+  "description": "Secure master-password encrypted 2FA TOTP authenticator with 1-click domain matching and auto-paste.",
+  "type": "module",
+  "scripts": {
+    "package": "powershell -Command \"Compress-Archive -Path manifest.json, background, content, icons, lib, popup, README.md -DestinationPath autoauthme.zip -Force\"",
+    "generate-icons": "node scripts/generate-icons.js",
+    "test": "node --input-type=module -e \"import { generateTOTP } from './lib/totp.js'; generateTOTP('GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ', { timestamp: 59000 }).then(c => console.log('Self-test TOTP:', c === '287082' ? 'PASS' : 'FAIL'));\""
+  },
+  "keywords": [
+    "2fa",
+    "totp",
+    "authenticator",
+    "autofill",
+    "chrome-extension"
+  ],
+  "author": "",
+  "license": "MIT"
+}

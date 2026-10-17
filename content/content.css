@@ -1,0 +1,132 @@
+/* AutoAuth In-Page Notification Toast — adaptive light/dark theme */
+
+#autoauth-toast-container {
+  /* Scoped design tokens (namespaced to avoid clashing with host pages) */
+  --aam-surface: rgba(255, 255, 255, 0.96);
+  --aam-text: #0f172a;
+  --aam-text-muted: #5b6b7f;
+  --aam-border: rgba(15, 23, 42, 0.10);
+  --aam-code-bg: rgba(15, 23, 42, 0.06);
+  --aam-code-color: #0369a1;
+  --aam-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 12px 32px rgba(15, 23, 42, 0.16);
+  --aam-highlight: #0891b2;
+
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 2147483647;
+  pointer-events: none;
+  font-family: "Inter", "Segoe UI Variable Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  #autoauth-toast-container {
+    --aam-surface: rgba(17, 22, 32, 0.96);
+    --aam-text: #eef2f8;
+    --aam-text-muted: #9aa7ba;
+    --aam-border: rgba(255, 255, 255, 0.10);
+    --aam-code-bg: rgba(255, 255, 255, 0.10);
+    --aam-code-color: #38bdf8;
+    --aam-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --aam-highlight: #22d3ee;
+  }
+}
+
+.autoauth-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 420px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--aam-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--aam-text);
+  box-shadow: var(--aam-shadow);
+  border: 1px solid var(--aam-border);
+  font-size: 14px;
+  line-height: 1.4;
+  transform: translateY(-20px) scale(0.96);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.autoauth-toast.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.autoauth-toast.hide {
+  transform: translateY(-15px) scale(0.97);
+  opacity: 0;
+}
+
+.autoauth-toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.autoauth-toast.success .autoauth-toast-icon {
+  background: rgba(16, 185, 129, 0.14);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+.autoauth-toast.warn .autoauth-toast-icon {
+  background: rgba(245, 158, 11, 0.14);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.30);
+}
+
+.autoauth-toast.error .autoauth-toast-icon {
+  background: rgba(239, 68, 68, 0.14);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+}
+
+.autoauth-toast-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.autoauth-toast-title {
+  font-weight: 600;
+  color: var(--aam-text);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+.autoauth-toast-msg {
+  color: var(--aam-text-muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.autoauth-toast-code {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: var(--aam-code-bg);
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--aam-code-color);
+  margin-left: 4px;
+}
+
+/* Pulsing highlight effect when field is auto-filled */
+.autoauth-highlight-field {
+  outline: 2px solid var(--aam-highlight, #0891b2) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.15), 0 0 16px rgba(8, 145, 178, 0.3) !important;
+  transition: all 0.2s ease-in-out !important;
+}

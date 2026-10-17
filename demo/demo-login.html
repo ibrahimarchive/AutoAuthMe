@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>AutoAuthMe - Demo & Test Verification Page</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f3f5f9;
+      --tint-1: rgba(37, 99, 235, 0.07);
+      --tint-2: rgba(6, 182, 212, 0.07);
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-muted: #5b6b7f;
+      --text-dim: #96a2b4;
+      --border: rgba(15, 23, 42, 0.10);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --input-bg: #eef2f7;
+      --accent: #0891b2;
+      --accent-strong: #0e7490;
+      --code: #0369a1;
+      --success: #059669;
+      --grad-brand: linear-gradient(135deg, #06b6d4, #2563eb);
+      --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.07);
+      --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.12);
+      --btn-shadow: 0 1px 2px rgba(15, 23, 42, 0.1), 0 6px 16px rgba(37, 99, 235, 0.25);
+      --focus-ring: 0 0 0 3px rgba(8, 145, 178, 0.16);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0e15;
+        --tint-1: rgba(37, 99, 235, 0.14);
+        --tint-2: rgba(6, 182, 212, 0.10);
+        --card: rgba(255, 255, 255, 0.045);
+        --text: #eef2f8;
+        --text-muted: #9aa7ba;
+        --text-dim: #66748a;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.16);
+        --input-bg: rgba(255, 255, 255, 0.05);
+        --accent: #22d3ee;
+        --accent-strong: #67e8f9;
+        --code: #38bdf8;
+        --success: #34d399;
+        --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.30);
+        --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
+        --btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 6px 16px rgba(6, 182, 212, 0.25);
+        --focus-ring: 0 0 0 3px rgba(34, 211, 238, 0.18);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Inter", "Segoe UI Variable Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(120% 80% at 0% 0%, var(--tint-1) 0%, transparent 55%),
+        radial-gradient(120% 80% at 100% 100%, var(--tint-2) 0%, transparent 55%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      max-width: 620px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      background: var(--grad-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card h2 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card p.desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      background: var(--input-bg);
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: var(--code);
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+    input[type="text"]::placeholder { color: var(--text-dim); }
+    input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: var(--focus-ring);
+    }
+    /* Split inputs */
+    .split-input-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 16px 0;
+    }
+    .split-digit {
+      width: 46px;
+      height: 54px;
+      font-size: 24px;
+      font-weight: 700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--code);
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+    .split-digit:focus {
+      border-color: var(--accent);
+      box-shadow: var(--focus-ring);
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: var(--grad-brand);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--btn-shadow);
+      transition: filter 0.15s ease, transform 0.14s ease;
+    }
+    .btn:hover {
+      filter: brightness(1.07);
+    }
+    .btn:active {
+      transform: scale(0.985);
+    }
+    .test-credentials {
+      margin-top: 28px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px 24px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: var(--shadow-sm);
+    }
+    .test-credentials h3 {
+      font-size: 15px;
+      color: var(--accent-strong);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .code-box {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: var(--code);
+      display: inline-block;
+      user-select: all;
+    }
+    .success-alert {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: color-mix(in srgb, var(--success) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--success) 30%, transparent);
+      color: var(--success);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>AutoAuthMe Test Verification Page</h1>
+    <p>Use this page to test the AutoAuthMe browser extension autofill feature with standard single-input and split-box 2FA verification forms.</p>
+  </div>
+
+  <div class="grid">
+    <!-- Test Case 1: Standard 2FA Input -->
+    <div class="card">
+      <h2><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-strong);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Test Form 1: Single OTP Input</h2>
+      <p class="desc">Standard verification input with <code>autocomplete="one-time-code"</code> and <code>name="otp"</code>.</p>
+      
+      <form id="form1" onsubmit="event.preventDefault(); showSuccess('alert1', 'Single OTP verified: ' + document.getElementById('otp-single').value);">
+        <div class="form-group">
+          <label for="otp-single">6-Digit Verification Code</label>
+          <input type="text" id="otp-single" name="otp" autocomplete="one-time-code" placeholder="Enter 6-digit code (e.g. 123456)" maxlength="8">
+        </div>
+        <button type="submit" class="btn">Verify Code</button>
+        <div id="alert1" class="success-alert"></div>
+      </form>
+    </div>
+
+    <!-- Test Case 2: Split 6-digit boxes -->
+    <div class="card">
+      <h2><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-strong);"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h.01M11 15h.01M15 15h.01M7 9h10"/></svg> Test Form 2: Split 6-Digit Boxes</h2>
+      <p class="desc">Individual 1-digit input boxes commonly found on modern login portals.</p>
+      
+      <form id="form2" onsubmit="event.preventDefault(); verifySplit();">
+        <label style="text-align: center;">Enter Code</label>
+        <div class="split-input-container">
+          <input type="text" class="split-digit" maxlength="1" inputmode="numeric">
+          <input type="text" class="split-digit" maxlength="1" inputmode="numeric">
+          <input type="text" class="split-digit" maxlength="1" inputmode="numeric">
+          <input type="text" class="split-digit" maxlength="1" inputmode="numeric">
+          <input type="text" class="split-digit" maxlength="1" inputmode="numeric">
+          <input type="text" class="split-digit" maxlength="1" inputmode="numeric">
+        </div>
+        <button type="submit" class="btn">Verify Split Code</button>
+        <div id="alert2" class="success-alert"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Test Sample Account Details -->
+  <div class="test-credentials">
+    <h3>Sample Test Account (Click to copy & add in AutoAuthMe extension)</h3>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
+      Add this account into AutoAuthMe to test live OTP generation & autofill:
+    </p>
+    <ul style="font-size: 13px; line-height: 1.9; list-style-position: inside; color: var(--text-muted);">
+      <li><strong style="color: var(--text);">Issuer:</strong> TestPortal</li>
+      <li><strong style="color: var(--text);">Secret (Base32):</strong> <span class="code-box">JBSWY3DPEHPK3PXP</span></li>
+      <li><strong style="color: var(--text);">otpauth URI:</strong> <span class="code-box">otpauth://totp/TestPortal:user@example.com?secret=JBSWY3DPEHPK3PXP&issuer=TestPortal</span></li>
+    </ul>
+  </div>
+
+  <script>
+    function showSuccess(alertId, text) {
+      const el = document.getElementById(alertId);
+      el.textContent = '✓ ' + text;
+      el.style.display = 'block';
+      setTimeout(() => { el.style.display = 'none'; }, 4000);
+    }
+
+    function verifySplit() {
+      const digits = Array.from(document.querySelectorAll('.split-digit')).map(i => i.value).join('');
+      showSuccess('alert2', 'Split boxes verified: ' + digits);
+    }
+
+    // Auto move between split boxes on manual typing
+    const splitInputs = document.querySelectorAll('.split-digit');
+    splitInputs.forEach((inp, idx) => {
+      inp.addEventListener('input', (e) => {
+        if (inp.value && idx < splitInputs.length - 1) {
+          splitInputs[idx + 1].focus();
+        }
+      });
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !inp.value && idx > 0) {
+          splitInputs[idx - 1].focus();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# --- Packaged build output ---
+autoauthme.zip
+
+# --- Exported vault backups ---
+# NEVER commit these: exported backups contain your 2FA secrets in PLAIN TEXT
+autoauth-backup*.json
+*backup*.json
+*vault*.json
+
+# --- Environment files ---
+.env
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Node ---
+node_modules/
+npm-debug.log*
