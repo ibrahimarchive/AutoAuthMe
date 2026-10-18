@@ -1,15 +1,18 @@
-/* AutoAuth In-Page Notification Toast — adaptive light/dark theme */
+// AutoAuth In-Page Notification Toast — adaptive palette (#000000 / #FFFFFC / #BEB7A4)
 
 #autoauth-toast-container {
   /* Scoped design tokens (namespaced to avoid clashing with host pages) */
-  --aam-surface: rgba(255, 255, 255, 0.96);
-  --aam-text: #0f172a;
-  --aam-text-muted: #5b6b7f;
-  --aam-border: rgba(15, 23, 42, 0.10);
-  --aam-code-bg: rgba(15, 23, 42, 0.06);
-  --aam-code-color: #0369a1;
-  --aam-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 12px 32px rgba(15, 23, 42, 0.16);
-  --aam-highlight: #0891b2;
+  --aam-surface: rgba(255, 255, 252, 0.96);
+  --aam-text: #000000;
+  --aam-text-muted: #6f6a5e;
+  --aam-border: rgba(0, 0, 0, 0.12);
+  --aam-code-bg: rgba(190, 183, 164, 0.30);
+  --aam-code-color: #5c5748;
+  --aam-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.16);
+  --aam-highlight: #9a9482;
+  --aam-success: #7d8a5c;
+  --aam-warn: #a67c3d;
+  --aam-error: #b0564a;
 
   position: fixed;
   top: 24px;
@@ -21,14 +24,17 @@
 
 @media (prefers-color-scheme: dark) {
   #autoauth-toast-container {
-    --aam-surface: rgba(17, 22, 32, 0.96);
-    --aam-text: #eef2f8;
-    --aam-text-muted: #9aa7ba;
-    --aam-border: rgba(255, 255, 255, 0.10);
-    --aam-code-bg: rgba(255, 255, 255, 0.10);
-    --aam-code-color: #38bdf8;
-    --aam-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.45);
-    --aam-highlight: #22d3ee;
+    --aam-surface: rgba(20, 20, 18, 0.96);
+    --aam-text: #fffffc;
+    --aam-text-muted: #a9a393;
+    --aam-border: rgba(255, 255, 252, 0.12);
+    --aam-code-bg: rgba(190, 183, 164, 0.15);
+    --aam-code-color: #d5cfc0;
+    --aam-shadow: 0 1px 2px rgba(0, 0, 0, 0.30), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --aam-highlight: #beb7a4;
+    --aam-success: #a9b48f;
+    --aam-warn: #d9b382;
+    --aam-error: #d98c7e;
   }
 }
 
@@ -76,21 +82,21 @@
 }
 
 .autoauth-toast.success .autoauth-toast-icon {
-  background: rgba(16, 185, 129, 0.14);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.28);
+  background: color-mix(in srgb, var(--aam-success) 14%, transparent);
+  color: var(--aam-success);
+  border: 1px solid color-mix(in srgb, var(--aam-success) 30%, transparent);
 }
 
 .autoauth-toast.warn .autoauth-toast-icon {
-  background: rgba(245, 158, 11, 0.14);
-  color: #d97706;
-  border: 1px solid rgba(245, 158, 11, 0.30);
+  background: color-mix(in srgb, var(--aam-warn) 14%, transparent);
+  color: var(--aam-warn);
+  border: 1px solid color-mix(in srgb, var(--aam-warn) 30%, transparent);
 }
 
 .autoauth-toast.error .autoauth-toast-icon {
-  background: rgba(239, 68, 68, 0.14);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.28);
+  background: color-mix(in srgb, var(--aam-error) 14%, transparent);
+  color: var(--aam-error);
+  border: 1px solid color-mix(in srgb, var(--aam-error) 30%, transparent);
 }
 
 .autoauth-toast-body {
@@ -125,8 +131,8 @@
 
 /* Pulsing highlight effect when field is auto-filled */
 .autoauth-highlight-field {
-  outline: 2px solid var(--aam-highlight, #0891b2) !important;
+  outline: 2px solid var(--aam-highlight, #9a9482) !important;
   outline-offset: 2px !important;
-  box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.15), 0 0 16px rgba(8, 145, 178, 0.3) !important;
+  box-shadow: 0 0 0 4px rgba(190, 183, 164, 0.20), 0 0 16px rgba(190, 183, 164, 0.35) !important;
   transition: all 0.2s ease-in-out !important;
 }

@@ -248,12 +248,12 @@ async function saveVaultData() {
 // --- Dynamic Avatar Color Generator ---
 function getAvatarGradient(issuer) {
   const gradients = [
-    'linear-gradient(135deg, #4f46e5, #06b6d4)',
-    'linear-gradient(135deg, #ec4899, #8b5cf6)',
-    'linear-gradient(135deg, #10b981, #059669)',
-    'linear-gradient(135deg, #f59e0b, #d97706)',
-    'linear-gradient(135deg, #3b82f6, #1d4ed8)',
-    'linear-gradient(135deg, #ef4444, #b91c1c)'
+    'linear-gradient(135deg, #d6d0c2, #b3ac99)',
+    'linear-gradient(135deg, #cbc4b3, #9a9482)',
+    'linear-gradient(135deg, #beb7a4, #8a8271)',
+    'linear-gradient(135deg, #d9d4c8, #b0a894)',
+    'linear-gradient(135deg, #c7bfae, #857f6d)',
+    'linear-gradient(135deg, #b3ac99, #6f6a5e)'
   ];
   let hash = 0;
   for (let i = 0; i < (issuer || '').length; i++) {
